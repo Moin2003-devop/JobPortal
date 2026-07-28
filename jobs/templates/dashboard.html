@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+    background:#f4f6f9;
+}
+
+.navbar{
+    background:#2c3e50;
+    color:white;
+    padding:18px 60px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    font-size:30px;
+    font-weight:bold;
+}
+
+.navbar a{
+    color:white;
+    text-decoration:none;
+    margin-left:25px;
+    font-size:17px;
+}
+
+.heading{
+    text-align:center;
+    margin:35px 0;
+    color:#2c3e50;
+}
+
+.container{
+    width:90%;
+    max-width:1100px;
+    margin:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    background:white;
+    border-radius:10px;
+    overflow:hidden;
+    box-shadow:0 5px 15px rgba(0,0,0,.1);
+}
+
+th{
+    background:#3498db;
+    color:white;
+    padding:15px;
+}
+
+td{
+    padding:15px;
+    border-bottom:1px solid #eee;
+    text-align:center;
+}
+
+tr:hover{
+    background:#f8f9fa;
+}
+
+.status{
+    background:#2ecc71;
+    color:white;
+    padding:6px 12px;
+    border-radius:20px;
+    font-size:14px;
+}
+
+.empty{
+    text-align:center;
+    margin-top:80px;
+    font-size:22px;
+    color:gray;
+}
+
+.footer{
+    margin-top:60px;
+    background:#2c3e50;
+    color:white;
+    text-align:center;
+    padding:20px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="navbar">
+
+<div class="logo">
+Job Portal
+</div>
+
+<div>
+<a href="/jobs/">Jobs</a>
+<a href="/jobs/dashboard/">Dashboard</a>
+<a href="/logout/">Logout</a>
+</div>
+
+</div>
+
+<h1 class="heading">Application Dashboard</h1>
+
+{% if applications %}
+
+<div class="container">
+
+<table>
+
+<tr>
+<th>ID</th>
+<th>Name</th>
+<th>Email</th>
+<th>Job</th>
+<th>Company</th>
+<th>Applied On</th>
+<th>Status</th>
+</tr>
+
+{% for application in applications %}
+
+<tr>
+
+<td>APP{{ application.id }}</td>
+
+<td>{{ application.applicant_name }}</td>
+
+<td>{{ application.email }}</td>
+
+<td>{{ application.job.title }}</td>
+
+<td>{{ application.job.company }}</td>
+
+<td>{{ application.created_at|date:"d M Y" }}</td>
+
+<td>
+<span class="status">
+Applied
+</span>
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+</div>
+
+{% else %}
+
+<div class="empty">
+
+No Applications Found
+
+</div>
+
+{% endif %}
+
+<div class="footer">
+
+© 2026 Job Portal | Built by Moinuddin Sonu
+
+</div>
+
+</body>
+</html>
